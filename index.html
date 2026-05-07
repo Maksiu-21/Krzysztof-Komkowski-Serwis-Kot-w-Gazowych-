@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Serwis Kotłów Gazowych | Krzysztof Komkowski</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#0c1117;
+    color:white;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at top left, rgba(0,162,255,0.12), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,140,0,0.12), transparent 35%);
+    z-index:-2;
+}
+
+.grid{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    z-index:-1;
+}
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+nav{
+    max-width:1300px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+}
+
+.logo{
+    font-size:1.8rem;
+    font-weight:900;
+    color:#00a2ff;
+}
+
+.menu{
+    display:flex;
+    gap:25px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+    position:relative;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    width:0%;
+    height:2px;
+    left:0;
+    bottom:-5px;
+    background:#00a2ff;
+    transition:0.3s;
+}
+
+.menu a:hover::after{
+    width:100%;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    flex-direction:column;
+    padding:0 20px;
+}
+
+.hero h1{
+    font-size:5rem;
+    font-weight:900;
+    max-width:1000px;
+    line-height:1.1;
+    background:linear-gradient(90deg,#00a2ff,#ff8c00);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+    margin-top:25px;
+    max-width:800px;
+    color:#cfcfcf;
+    font-size:1.2rem;
+}
+
+.buttons{
+    margin-top:40px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.btn{
+    padding:16px 35px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:700;
+    transition:0.3s;
+}
+
+.btn-primary{
+    background:linear-gradient(90deg,#00a2ff,#0077ff);
+    color:white;
+    box-shadow:0 0 20px rgba(0,162,255,0.4);
+}
+
+.btn-secondary{
+    border:2px solid #ff8c00;
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-5px) scale(1.05);
+}
+
+section{
+    padding:120px 20px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:60px;
+    font-weight:900;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:35px;
+    transition:0.4s;
+    backdrop-filter:blur(10px);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#00a2ff;
+    box-shadow:0 0 25px rgba(0,162,255,0.25);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#00a2ff;
+    font-size:1.5rem;
+}
+
+.info-box{
+    background:rgba(255,255,255,0.04);
+    border-radius:25px;
+    padding:50px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.info-item h4{
+    color:#00a2ff;
+    margin-bottom:10px;
+}
+
+.contact{
+    text-align:center;
+    background:linear-gradient(135deg,rgba(0,162,255,0.12),rgba(255,140,0,0.12));
+    border-radius:25px;
+    padding:70px 20px;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.phone{
+    font-size:2.5rem;
+    font-weight:900;
+    margin-top:20px;
+    color:#ff8c00;
+}
+
+footer{
+    padding:40px 20px;
+    text-align:center;
+    border-top:1px solid rgba(255,255,255,0.08);
+    color:#999;
+    margin-top:80px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:3rem;
+}
+
+.menu{
+    display:none;
+}
+
+.section-title{
+    font-size:2rem;
+}
+
+.phone{
+    font-size:1.8rem;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="grid"></div>
+
+<header>
+
+<nav>
+
+<div class="logo">
+SERWIS KOTŁÓW GAZOWYCH
+</div>
+
+<div class="menu">
+<a href="#about">O firmie</a>
+<a href="#services">Usługi</a>
+<a href="#company">Dane firmy</a>
+<a href="#contact">Kontakt</a>
+</div>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>
+Profesjonalny Serwis Kotłów Gazowych
+</h1>
+
+<p>
+Naprawa, konserwacja oraz serwis kotłów gazowych.
+Szybki dojazd, profesjonalna obsługa oraz doświadczenie.
+</p>
+
+<div class="buttons">
+
+<a href="#contact" class="btn btn-primary">
+Skontaktuj się
+</a>
+
+<a href="tel:531280460" class="btn btn-secondary">
+Zadzwoń teraz
+</a>
+
+</div>
+
+</section>
+
+<section id="about">
+
+<h2 class="section-title">
+O firmie
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Doświadczenie</h3>
+<p>
+Profesjonalna obsługa oraz indywidualne podejście do każdego klienta.
+</p>
+</div>
+
+<div class="card">
+<h3>Serwis</h3>
+<p>
+Naprawa, diagnostyka oraz konserwacja kotłów gazowych różnych producentów.
+</p>
+</div>
+
+<div class="card">
+<h3>Szybki kontakt</h3>
+<p>
+Szybki czas realizacji oraz sprawny dojazd do klienta.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="services">
+
+<h2 class="section-title">
+Zakres usług
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Naprawa kotłów</h3>
+<p>
+Usuwanie usterek oraz pełna diagnostyka urządzeń gazowych.
+</p>
+</div>
+
+<div class="card">
+<h3>Konserwacja</h3>
+<p>
+Regularne przeglądy techniczne oraz czyszczenie kotłów.
+</p>
+</div>
+
+<div class="card">
+<h3>Uruchomienia</h3>
+<p>
+Pomoc przy pierwszym uruchomieniu i konfiguracji urządzeń.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="company">
+
+<h2 class="section-title">
+Dane firmowe
+</h2>
+
+<div class="info-box">
+
+<div class="info-grid">
+
+<div class="info-item">
+<h4>Właściciel</h4>
+<p>Krzysztof Komkowski</p>
+</div>
+
+<div class="info-item">
+<h4>Nazwa firmy</h4>
+<p>Krzysztof Komkowski Serwis Kotłów Gazowych</p>
+</div>
+
+<div class="info-item">
+<h4>Adres</h4>
+<p>
+ul. Osiedle Kaszubskie 16<br>
+84-250 Gniewino
+</p>
+</div>
+
+<div class="info-item">
+<h4>Telefon</h4>
+<p>531 280 460</p>
+</div>
+
+<div class="info-item">
+<h4>NIP</h4>
+<p>5871470378</p>
+</div>
+
+<div class="info-item">
+<h4>REGON</h4>
+<p>368036582</p>
+</div>
+
+<div class="info-item">
+<h4>Forma działalności</h4>
+<p>Indywidualna działalność gospodarcza</p>
+</div>
+
+<div class="info-item">
+<h4>Data rozpoczęcia działalności</h4>
+<p>05.04.2024</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<div class="contact">
+
+<h2 class="section-title">
+Kontakt
+</h2>
+
+<p>
+Masz pytania lub potrzebujesz serwisu kotła gazowego?
+Skontaktuj się telefonicznie.
+</p>
+
+<div class="phone">
+531 280 460
+</div>
+
+<div style="margin-top:35px;">
+
+<a href="tel:531280460" class="btn btn-primary">
+Zadzwoń teraz
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+© 2026 Krzysztof Komkowski Serwis Kotłów Gazowych
+</footer>
+
+</body>
+</html>
