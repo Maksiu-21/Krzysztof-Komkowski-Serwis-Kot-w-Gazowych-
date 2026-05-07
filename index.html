@@ -22,19 +22,33 @@
 
 body{
     font-family:'Montserrat',sans-serif;
-    background:#0c1117;
+    background:#081018;
     color:white;
     overflow-x:hidden;
 }
 
-body::before{
-    content:"";
+.hero-bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:
+    linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+    url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1974&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    z-index:-3;
+    filter:brightness(0.9);
+}
+
+.overlay{
     position:fixed;
     width:100%;
     height:100%;
     background:
-    radial-gradient(circle at top left, rgba(0,162,255,0.12), transparent 35%),
-    radial-gradient(circle at bottom right, rgba(255,140,0,0.12), transparent 35%);
+    radial-gradient(circle at top left, rgba(0,162,255,0.18), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255,140,0,0.18), transparent 35%);
     z-index:-2;
 }
 
@@ -55,7 +69,7 @@ header{
     top:0;
     z-index:1000;
     background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
     border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
@@ -69,19 +83,21 @@ nav{
 }
 
 .logo{
-    font-size:1.8rem;
+    font-size:1.7rem;
     font-weight:900;
     color:#00a2ff;
+    text-shadow:0 0 20px rgba(0,162,255,0.4);
 }
 
 .menu{
     display:flex;
-    gap:25px;
+    gap:30px;
 }
 
 .menu a{
-    text-decoration:none;
     color:white;
+    text-decoration:none;
+    font-weight:500;
     transition:0.3s;
     position:relative;
 }
@@ -92,7 +108,7 @@ nav{
     width:0%;
     height:2px;
     left:0;
-    bottom:-5px;
+    bottom:-6px;
     background:#00a2ff;
     transition:0.3s;
 }
@@ -104,8 +120,8 @@ nav{
 .hero{
     min-height:100vh;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     text-align:center;
     flex-direction:column;
     padding:0 20px;
@@ -119,13 +135,15 @@ nav{
     background:linear-gradient(90deg,#00a2ff,#ff8c00);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    text-shadow:0 0 30px rgba(0,162,255,0.3);
 }
 
 .hero p{
     margin-top:25px;
-    max-width:800px;
-    color:#cfcfcf;
+    max-width:850px;
+    color:#d8d8d8;
     font-size:1.2rem;
+    line-height:1.8;
 }
 
 .buttons{
@@ -138,7 +156,7 @@ nav{
 
 .btn{
     padding:16px 35px;
-    border-radius:12px;
+    border-radius:14px;
     text-decoration:none;
     font-weight:700;
     transition:0.3s;
@@ -147,7 +165,7 @@ nav{
 .btn-primary{
     background:linear-gradient(90deg,#00a2ff,#0077ff);
     color:white;
-    box-shadow:0 0 20px rgba(0,162,255,0.4);
+    box-shadow:0 0 25px rgba(0,162,255,0.4);
 }
 
 .btn-secondary{
@@ -179,37 +197,72 @@ section{
 }
 
 .card{
-    background:rgba(255,255,255,0.04);
+    background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.08);
-    border-radius:20px;
+    border-radius:25px;
     padding:35px;
-    transition:0.4s;
     backdrop-filter:blur(10px);
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:linear-gradient(45deg,transparent,rgba(255,255,255,0.08),transparent);
+    transform:rotate(45deg);
+    top:-150%;
+    left:-150%;
+    transition:0.7s;
+}
+
+.card:hover::before{
+    top:100%;
+    left:100%;
 }
 
 .card:hover{
     transform:translateY(-10px);
     border-color:#00a2ff;
-    box-shadow:0 0 25px rgba(0,162,255,0.25);
+    box-shadow:0 0 30px rgba(0,162,255,0.25);
 }
 
 .card h3{
-    margin-bottom:15px;
     color:#00a2ff;
+    margin-bottom:15px;
     font-size:1.5rem;
 }
 
-.info-box{
-    background:rgba(255,255,255,0.04);
-    border-radius:25px;
-    padding:50px;
+.big-service{
+    background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.08);
+    border-radius:30px;
+    padding:60px;
+    line-height:2;
+    font-size:1.1rem;
+    color:#d7d7d7;
+    backdrop-filter:blur(10px);
+}
+
+.big-service strong{
+    color:#00a2ff;
+}
+
+.info-box{
+    background:rgba(255,255,255,0.05);
+    border-radius:30px;
+    padding:60px;
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
 }
 
 .info-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+    gap:35px;
 }
 
 .info-item h4{
@@ -220,13 +273,14 @@ section{
 .contact{
     text-align:center;
     background:linear-gradient(135deg,rgba(0,162,255,0.12),rgba(255,140,0,0.12));
-    border-radius:25px;
-    padding:70px 20px;
+    border-radius:30px;
+    padding:80px 20px;
     border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
 }
 
 .phone{
-    font-size:2.5rem;
+    font-size:3rem;
     font-weight:900;
     margin-top:20px;
     color:#ff8c00;
@@ -255,7 +309,11 @@ footer{
 }
 
 .phone{
-    font-size:1.8rem;
+    font-size:2rem;
+}
+
+.big-service{
+    padding:35px;
 }
 
 }
@@ -264,6 +322,8 @@ footer{
 </head>
 <body>
 
+<div class="hero-bg"></div>
+<div class="overlay"></div>
 <div class="grid"></div>
 
 <header>
@@ -288,12 +348,12 @@ SERWIS KOTŁÓW GAZOWYCH
 <section class="hero">
 
 <h1>
-Profesjonalny Serwis Kotłów Gazowych
+Profesjonalny Serwis i Montaż Kotłów Gazowych
 </h1>
 
 <p>
-Naprawa, konserwacja oraz serwis kotłów gazowych.
-Szybki dojazd, profesjonalna obsługa oraz doświadczenie.
+Kompleksowa obsługa instalacji gazowych, centralnego ogrzewania
+oraz nowoczesnych kotłowni.
 </p>
 
 <div class="buttons">
@@ -303,7 +363,7 @@ Skontaktuj się
 </a>
 
 <a href="tel:531280460" class="btn btn-secondary">
-Zadzwoń teraz
+531 280 460
 </a>
 
 </div>
@@ -319,23 +379,23 @@ O firmie
 <div class="cards">
 
 <div class="card">
-<h3>Doświadczenie</h3>
+<h3>Profesjonalizm</h3>
 <p>
-Profesjonalna obsługa oraz indywidualne podejście do każdego klienta.
+Rzetelna obsługa oraz indywidualne podejście do każdego klienta.
 </p>
 </div>
 
 <div class="card">
-<h3>Serwis</h3>
+<h3>Nowoczesne rozwiązania</h3>
 <p>
-Prowadzimy serwis kotłów gazowych Viessmann, Vaillant oraz Immergas. Wykonujemy montaż i modernizację kotłowni gazowych od projektu i zezwolenia aż po odbiór. Montujemy instalacje centralnego ogrzewania, podłogowe i kanalizacyjne. Prowadzimy wszystkie prace związane z hydrauliką
+Montaż i modernizacja nowoczesnych systemów grzewczych.
 </p>
 </div>
 
 <div class="card">
 <h3>Szybki kontakt</h3>
 <p>
-Szybki czas realizacji oraz sprawny dojazd do klienta.
+Sprawna realizacja usług oraz szybki dojazd do klienta.
 </p>
 </div>
 
@@ -349,28 +409,24 @@ Szybki czas realizacji oraz sprawny dojazd do klienta.
 Zakres usług
 </h2>
 
-<div class="cards">
+<div class="big-service">
 
-<div class="card">
-<h3>Naprawa kotłów</h3>
-<p>
-Usuwanie usterek oraz pełna diagnostyka urządzeń gazowych.
-</p>
-</div>
+<strong>Prowadzimy serwis kotłów gazowych Viessmann, Vaillant oraz Immergas.</strong>
 
-<div class="card">
-<h3>Konserwacja</h3>
-<p>
-Regularne przeglądy techniczne oraz czyszczenie kotłów.
-</p>
-</div>
+<br><br>
 
-<div class="card">
-<h3>Uruchomienia</h3>
-<p>
-Pomoc przy pierwszym uruchomieniu i konfiguracji urządzeń.
-</p>
-</div>
+Wykonujemy montaż i modernizację kotłowni gazowych
+od projektu i uzyskania zezwoleń aż po końcowy odbiór instalacji.
+
+<br><br>
+
+Montujemy instalacje centralnego ogrzewania,
+ogrzewanie podłogowe oraz instalacje kanalizacyjne.
+
+<br><br>
+
+Prowadzimy kompleksowe prace hydrauliczne związane
+z instalacjami grzewczymi i wodno-kanalizacyjnymi.
 
 </div>
 
@@ -444,7 +500,7 @@ Kontakt
 </h2>
 
 <p>
-Masz pytania lub potrzebujesz serwisu kotła gazowego?
+Potrzebujesz serwisu lub montażu kotła gazowego?
 Skontaktuj się telefonicznie.
 </p>
 
