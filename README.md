@@ -1,1 +1,1 @@
-# Krzysztof-Komkowski-Serwis-Kot-w-Gazowych-
+# Krzysztof-Komkowski-Serwis-Kotlow-Gazowych-
